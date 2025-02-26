@@ -40,30 +40,30 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaMuebles);
         listView.setAdapter(adapter);
 
-        // Agregar el TextWatcher para filtrar los muebles
+
         editTextFiltro.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-                // No se necesita hacer nada aquí
+
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                // Filtrar los muebles cuando el texto cambie
+
                 filtrarDatos(charSequence);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // No se necesita hacer nada aquí
+
             }
         });
 
-        // Mostrar la lista de muebles al iniciar la actividad
+
         consultarDatos();
     }
 
-    // Método para insertar un mueble
+
     public void insertarDatos(View view) {
         String nombre = editTextNombre.getText().toString();
         String color = editTextColor.getText().toString();
@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
         baseDeDatos.insert("muebles", null, registro);
 
         mensaje.setText("Datos ingresados correctamente");
-        consultarDatos();  // Actualiza la lista después de insertar un mueble
+        consultarDatos();
     }
-    // Método para borrar todos los muebles
+
     public void borrarDatos(View view) {
         AdmBaseDatosSQLite admin = new AdmBaseDatosSQLite(MainActivity.this, "MueblesDB", null, 1);
         SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    // Método para consultar todos los muebles
+
     private void consultarDatos() {
         AdmBaseDatosSQLite admin = new AdmBaseDatosSQLite(MainActivity.this, "MueblesDB", null, 1);
         SQLiteDatabase baseDeDatos = admin.getReadableDatabase();
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    // Método para filtrar los muebles por nombre
+
     public void filtrarDatos(CharSequence charSequence) {
         String filtro = charSequence.toString();
         AdmBaseDatosSQLite admin = new AdmBaseDatosSQLite(MainActivity.this, "MueblesDB", null, 1);
@@ -144,16 +144,16 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    // Método para mostrar y ocultar la lista de muebles
+
     public void mostrarOcultarLista(View view) {
         if (listaVisible) {
-            listView.setVisibility(View.GONE);  // Oculta la lista
-            buttonMostrarOcultar.setText("Mostrar Muebles");  // Cambia el texto del botón
+            listView.setVisibility(View.GONE);
+            buttonMostrarOcultar.setText("Mostrar Muebles");
         } else {
-            listView.setVisibility(View.VISIBLE);  // Muestra la lista
-            buttonMostrarOcultar.setText("Ocultar Muebles");  // Cambia el texto del botón
+            listView.setVisibility(View.VISIBLE);
+            buttonMostrarOcultar.setText("Ocultar Muebles");
         }
 
-        listaVisible = !listaVisible;  // Cambia el estado de la visibilidad
+        listaVisible = !listaVisible;
     }
 }
